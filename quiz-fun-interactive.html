@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun & Interactive Quiz - ExcelQuest</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .quiz-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+        .options li {
+            margin: 10px 0;
+        }
+        .options input {
+            margin-right: 10px;
+        }
+        .feedback {
+            color: #28a745;
+            margin-top: 10px;
+            display: none;
+        }
+        .submit-btn {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+        .score {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .question-number {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <span class="logo-icon">📊</span>
+                ExcelQuest
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="modules.html">Modules</a></li>
+                <li><a href="challenges.html">Challenges</a></li>
+                <li><a href="glossary.html">Glossary</a></li>
+                <li><a href="about.html">About Us</a></li>
+            </ul>
+            <button class="cta-button" onclick="window.location.href='index.html'">Back to Home</button>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Fun & Interactive Excel Quiz!</h1>
+        <p class="tagline">Test your Excel skills with this exciting quiz and see how much you've learned!</p>
+        <div class="hero-buttons">
+            <button class="cta-button" onclick="startQuiz()">Start Quiz</button>
+            <button class="secondary-button" onclick="window.location.href='index.html'">Back to Home</button>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="quiz-container" id="quiz" style="display: none;">
+            <form id="quizForm">
+                <div class="question">
+                    <p class="question-number">1. What is the default file extension for an Excel workbook?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q1" value="a"> a) .xls</li>
+                        <li><input type="radio" name="q1" value="b"> b) .xlsx</li>
+                        <li><input type="radio" name="q1" value="c"> c) .docx</li>
+                    </ul>
+                    <div class="feedback" id="q1Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">2. Which function adds a range of cells?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q2" value="a"> a) SUM</li>
+                        <li><input type="radio" name="q2" value="b"> b) AVERAGE</li>
+                        <li><input type="radio" name="q2" value="c"> c) COUNT</li>
+                    </ul>
+                    <div class="feedback" id="q2Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">3. What does the 'A1' represent in Excel?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q3" value="a"> a) A column and 1st row</li>
+                        <li><input type="radio" name="q3" value="b"> b) 1st column and A row</li>
+                        <li><input type="radio" name="q3" value="c"> c) A sheet and 1st cell</li>
+                    </ul>
+                    <div class="feedback" id="q3Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">4. Which tab contains the 'Sort' feature?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q4" value="a"> a) Home</li>
+                        <li><input type="radio" name="q4" value="b"> b) Data</li>
+                        <li><input type="radio" name="q4" value="c"> c) Insert</li>
+                    </ul>
+                    <div class="feedback" id="q4Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">5. What is the purpose of the 'Fill Handle'?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q5" value="a"> a) To delete data</li>
+                        <li><input type="radio" name="q5" value="b"> b) To copy or extend data</li>
+                        <li><input type="radio" name="q5" value="c"> c) To format cells</li>
+                    </ul>
+                    <div class="feedback" id="q5Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">6. Which function calculates the average of a range?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q6" value="a"> a) SUM</li>
+                        <li><input type="radio" name="q6" value="b"> b) AVERAGE</li>
+                        <li><input type="radio" name="q6" value="c"> c) MAX</li>
+                    </ul>
+                    <div class="feedback" id="q6Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">7. What does the 'Freeze Panes' feature do?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q7" value="a"> a) Locks rows or columns</li>
+                        <li><input type="radio" name="q7" value="b"> b) Deletes selected cells</li>
+                        <li><input type="radio" name="q7" value="c"> c) Hides the worksheet</li>
+                    </ul>
+                    <div class="feedback" id="q7Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">8. Which chart type is best for comparing values?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q8" value="a"> a) Pie Chart</li>
+                        <li><input type="radio" name="q8" value="b"> b) Column Chart</li>
+                        <li><input type="radio" name="q8" value="c"> c) Line Chart</li>
+                    </ul>
+                    <div class="feedback" id="q8Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">9. What is the shortcut to copy in Excel?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q9" value="a"> a) Ctrl + C</li>
+                        <li><input type="radio" name="q9" value="b"> b) Ctrl + V</li>
+                        <li><input type="radio" name="q9" value="c"> c) Ctrl + X</li>
+                    </ul>
+                    <div class="feedback" id="q9Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">10. Which function finds the largest value in a range?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q10" value="a"> a) MIN</li>
+                        <li><input type="radio" name="q10" value="b"> b) MAX</li>
+                        <li><input type="radio" name="q10" value="c"> c) AVERAGE</li>
+                    </ul>
+                    <div class="feedback" id="q10Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">11. What does the 'Conditional Formatting' feature do?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q11" value="a"> a) Locks cells</li>
+                        <li><input type="radio" name="q11" value="b"> b) Formats cells based on rules</li>
+                        <li><input type="radio" name="q11" value="c"> c) Deletes data</li>
+                    </ul>
+                    <div class="feedback" id="q11Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">12. Which tab contains the 'PivotTable' option?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q12" value="a"> a) Insert</li>
+                        <li><input type="radio" name="q12" value="b"> b) Data</li>
+                        <li><input type="radio" name="q12" value="c"> c) View</li>
+                    </ul>
+                    <div class="feedback" id="q12Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">13. What is the purpose of the 'VLOOKUP' function?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q13" value="a"> a) Vertical lookup</li>
+                        <li><input type="radio" name="q13" value="b"> b) Horizontal lookup</li>
+                        <li><input type="radio" name="q13" value="c"> c) Average lookup</li>
+                    </ul>
+                    <div class="feedback" id="q13Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">14. Which shortcut undoes the last action?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q14" value="a"> a) Ctrl + Z</li>
+                        <li><input type="radio" name="q14" value="b"> b) Ctrl + Y</li>
+                        <li><input type="radio" name="q14" value="c"> c) Ctrl + X</li>
+                    </ul>
+                    <div class="feedback" id="q14Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">15. What is the maximum number of rows in Excel 2019?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q15" value="a"> a) 65,536</li>
+                        <li><input type="radio" name="q15" value="b"> b) 1,048,576</li>
+                        <li><input type="radio" name="q15" value="c"> c) 16,384</li>
+                    </ul>
+                    <div class="feedback" id="q15Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">16. Which function counts non-empty cells?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q16" value="a"> a) COUNT</li>
+                        <li><input type="radio" name="q16" value="b"> b) COUNTA</li>
+                        <li><input type="radio" name="q16" value="c"> c) COUNTIF</li>
+                    </ul>
+                    <div class="feedback" id="q16Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">17. What does the 'AutoFill' feature do?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q17" value="a"> a) Deletes data</li>
+                        <li><input type="radio" name="q17" value="b"> b) Fills data patterns</li>
+                        <li><input type="radio" name="q17" value="c"> c) Formats cells</li>
+                    </ul>
+                    <div class="feedback" id="q17Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">18. Which chart shows trends over time?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q18" value="a"> a) Pie Chart</li>
+                        <li><input type="radio" name="q18" value="b"> b) Line Chart</li>
+                        <li><input type="radio" name="q18" value="c"> c) Bar Chart</li>
+                    </ul>
+                    <div class="feedback" id="q18Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">19. What is the shortcut to save a file?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q19" value="a"> a) Ctrl + S</li>
+                        <li><input type="radio" name="q19" value="b"> b) Ctrl + P</li>
+                        <li><input type="radio" name="q19" value="c"> c) Ctrl + O</li>
+                    </ul>
+                    <div class="feedback" id="q19Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">20. Which function finds the smallest value?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q20" value="a"> a) MIN</li>
+                        <li><input type="radio" name="q20" value="b"> b) MAX</li>
+                        <li><input type="radio" name="q20" value="c"> c) SUM</li>
+                    </ul>
+                    <div class="feedback" id="q20Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">21. What is the purpose of the 'Filter' feature?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q21" value="a"> a) Sorts data</li>
+                        <li><input type="radio" name="q21" value="b"> b) Displays specific data</li>
+                        <li><input type="radio" name="q21" value="c"> c) Deletes rows</li>
+                    </ul>
+                    <div class="feedback" id="q21Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">22. Which tab contains the 'Chart' options?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q22" value="a"> a) Insert</li>
+                        <li><input type="radio" name="q22" value="b"> b) Home</li>
+                        <li><input type="radio" name="q22" value="c"> c) Data</li>
+                    </ul>
+                    <div class="feedback" id="q22Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">23. What does the 'HLOOKUP' function do?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q23" value="a"> a) Horizontal lookup</li>
+                        <li><input type="radio" name="q23" value="b"> b) Vertical lookup</li>
+                        <li><input type="radio" name="q23" value="c"> c) Diagonal lookup</li>
+                    </ul>
+                    <div class="feedback" id="q23Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">24. Which shortcut redoes the last action?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q24" value="a"> a) Ctrl + Y</li>
+                        <li><input type="radio" name="q24" value="b"> b) Ctrl + Z</li>
+                        <li><input type="radio" name="q24" value="c"> c) Ctrl + X</li>
+                    </ul>
+                    <div class="feedback" id="q24Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">25. What is the maximum number of columns in Excel 2019?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q25" value="a"> a) 16,384</li>
+                        <li><input type="radio" name="q25" value="b"> b) 65,536</li>
+                        <li><input type="radio" name="q25" value="c"> c) 1,048,576</li>
+                    </ul>
+                    <div class="feedback" id="q25Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">26. Which function counts cells meeting a condition?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q26" value="a"> a) COUNT</li>
+                        <li><input type="radio" name="q26" value="b"> b) COUNTA</li>
+                        <li><input type="radio" name="q26" value="c"> c) COUNTIF</li>
+                    </ul>
+                    <div class="feedback" id="q26Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">27. What does the 'Text to Columns' feature do?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q27" value="a"> a) Splits text into columns</li>
+                        <li><input type="radio" name="q27" value="b"> b) Merges columns</li>
+                        <li><input type="radio" name="q27" value="c"> c) Deletes text</li>
+                    </ul>
+                    <div class="feedback" id="q27Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">28. Which chart shows proportions?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q28" value="a"> a) Pie Chart</li>
+                        <li><input type="radio" name="q28" value="b"> b) Bar Chart</li>
+                        <li><input type="radio" name="q28" value="c"> c) Line Chart</li>
+                    </ul>
+                    <div class="feedback" id="q28Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">29. What is the shortcut to paste?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q29" value="a"> a) Ctrl + V</li>
+                        <li><input type="radio" name="q29" value="b"> b) Ctrl + C</li>
+                        <li><input type="radio" name="q29" value="c"> c) Ctrl + X</li>
+                    </ul>
+                    <div class="feedback" id="q29Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">30. Which function rounds a number?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q30" value="a"> a) ROUND</li>
+                        <li><input type="radio" name="q30" value="b"> b) SUM</li>
+                        <li><input type="radio" name="q30" value="c"> c) AVERAGE</li>
+                    </ul>
+                    <div class="feedback" id="q30Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">31. What is the purpose of the 'Data Validation' feature?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q31" value="a"> a) Deletes invalid data</li>
+                        <li><input type="radio" name="q31" value="b"> b) Restricts data entry</li>
+                        <li><input type="radio" name="q31" value="c"> c) Sorts data</li>
+                    </ul>
+                    <div class="feedback" id="q31Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">32. Which tab contains the 'Format Painter'?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q32" value="a"> a) Home</li>
+                        <li><input type="radio" name="q32" value="b"> b) Insert</li>
+                        <li><input type="radio" name="q32" value="c"> c) Data</li>
+                    </ul>
+                    <div class="feedback" id="q32Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">33. What does the 'IF' function do?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q33" value="a"> a) Adds numbers</li>
+                        <li><input type="radio" name="q33" value="b"> b) Returns a value based on a condition</li>
+                        <li><input type="radio" name="q33" value="c"> c) Counts cells</li>
+                    </ul>
+                    <div class="feedback" id="q33Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">34. Which shortcut opens a new workbook?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q34" value="a"> a) Ctrl + N</li>
+                        <li><input type="radio" name="q34" value="b"> b) Ctrl + O</li>
+                        <li><input type="radio" name="q34" value="c"> c) Ctrl + S</li>
+                    </ul>
+                    <div class="feedback" id="q34Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">35. What is the purpose of the 'Page Layout' tab?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q35" value="a"> a) Adds charts</li>
+                        <li><input type="radio" name="q35" value="b"> b) Sets print options</li>
+                        <li><input type="radio" name="q35" value="c"> c) Inserts data</li>
+                    </ul>
+                    <div class="feedback" id="q35Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">36. Which function concatenates text?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q36" value="a"> a) CONCAT</li>
+                        <li><input type="radio" name="q36" value="b"> b) SUM</li>
+                        <li><input type="radio" name="q36" value="c"> c) AVERAGE</li>
+                    </ul>
+                    <div class="feedback" id="q36Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">37. What does the 'Transpose' feature do?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q37" value="a"> a) Rotates data</li>
+                        <li><input type="radio" name="q37" value="b"> b) Deletes data</li>
+                        <li><input type="radio" name="q37" value="c"> c) Sorts data</li>
+                    </ul>
+                    <div class="feedback" id="q37Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">38. Which chart is best for categorical data?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q38" value="a"> a) Line Chart</li>
+                        <li><input type="radio" name="q38" value="b"> b) Bar Chart</li>
+                        <li><input type="radio" name="q38" value="c"> c) Pie Chart</li>
+                    </ul>
+                    <div class="feedback" id="q38Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">39. What is the shortcut to bold text?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q39" value="a"> a) Ctrl + B</li>
+                        <li><input type="radio" name="q39" value="b"> b) Ctrl + I</li>
+                        <li><input type="radio" name="q39" value="c"> c) Ctrl + U</li>
+                    </ul>
+                    <div class="feedback" id="q39Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">40. Which function checks for errors?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q40" value="a"> a) IFERROR</li>
+                        <li><input type="radio" name="q40" value="b"> b) ERROR</li>
+                        <li><input type="radio" name="q40" value="c"> c) CHECK</li>
+                    </ul>
+                    <div class="feedback" id="q40Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">41. What is the purpose of the 'Goal Seek' tool?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q41" value="a"> a) Sorts data</li>
+                        <li><input type="radio" name="q41" value="b"> b) Finds input for a target value</li>
+                        <li><input type="radio" name="q41" value="c"> c) Deletes cells</li>
+                    </ul>
+                    <div class="feedback" id="q41Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">42. Which tab contains the 'Subtotal' feature?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q42" value="a"> a) Home</li>
+                        <li><input type="radio" name="q42" value="b"> b) Data</li>
+                        <li><input type="radio" name="q42" value="c"> c) Insert</li>
+                    </ul>
+                    <div class="feedback" id="q42Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">43. What does the 'INDEX' function do?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q43" value="a"> a) Sums data</li>
+                        <li><input type="radio" name="q43" value="b"> b) Returns a value from a range</li>
+                        <li><input type="radio" name="q43" value="c"> c) Counts cells</li>
+                    </ul>
+                    <div class="feedback" id="q43Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">44. Which shortcut opens the 'Find' dialog?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q44" value="a"> a) Ctrl + F</li>
+                        <li><input type="radio" name="q44" value="b"> b) Ctrl + H</li>
+                        <li><input type="radio" name="q44" value="c"> c) Ctrl + G</li>
+                    </ul>
+                    <div class="feedback" id="q44Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">45. What is the purpose of the 'Scenario Manager'?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q45" value="a"> a) Creates charts</li>
+                        <li><input type="radio" name="q45" value="b"> b) Manages multiple scenarios</li>
+                        <li><input type="radio" name="q45" value="c"> c) Deletes data</li>
+                    </ul>
+                    <div class="feedback" id="q45Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">46. Which function converts text to uppercase?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q46" value="a"> a) UPPER</li>
+                        <li><input type="radio" name="q46" value="b"> b) LOWER</li>
+                        <li><input type="radio" name="q46" value="c"> c) PROPER</li>
+                    </ul>
+                    <div class="feedback" id="q46Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">47. What does the 'Protect Sheet' feature do?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q47" value="a"> a) Hides data</li>
+                        <li><input type="radio" name="q47" value="b"> b) Prevents editing</li>
+                        <li><input type="radio" name="q47" value="c"> c) Deletes cells</li>
+                    </ul>
+                    <div class="feedback" id="q47Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">48. Which chart shows data distribution?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q48" value="a"> a) Histogram</li>
+                        <li><input type="radio" name="q48" value="b"> b) Pie Chart</li>
+                        <li><input type="radio" name="q48" value="c"> c) Line Chart</li>
+                    </ul>
+                    <div class="feedback" id="q48Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">49. What is the shortcut to italicize text?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q49" value="a"> a) Ctrl + I</li>
+                        <li><input type="radio" name="q49" value="b"> b) Ctrl + B</li>
+                        <li><input type="radio" name="q49" value="c"> c) Ctrl + U</li>
+                    </ul>
+                    <div class="feedback" id="q49Feedback"></div>
+                </div>
+                <div class="question">
+                    <p class="question-number">50. Which function calculates the median?</p>
+                    <ul class="options">
+                        <li><input type="radio" name="q50" value="a"> a) MEDIAN</li>
+                        <li><input type="radio" name="q50" value="b"> b) AVERAGE</li>
+                        <li><input type="radio" name="q50" value="c"> c) MODE</li>
+                    </ul>
+                    <div class="feedback" id="q50Feedback"></div>
+                </div>
+                <button type="button" class="submit-btn" onclick="checkAnswers()">Submit Quiz</button>
+            </form>
+            <div class="score" id="score"></div>
+            <div class="share-section" id="shareSection">
+                <button class="share-btn" onclick="shareOnWhatsApp()">Share on WhatsApp</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 ExcelQuest. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+    </footer>
+
+    <script>
+        function startQuiz() {
+            document.getElementById('quiz').style.display = 'block';
+        }
+
+        function checkAnswers() {
+            let score = 0;
+            const answers = {
+                q1: 'b', q2: 'a', q3: 'a', q4: 'b', q5: 'b',
+                q6: 'b', q7: 'a', q8: 'b', q9: 'a', q10: 'b',
+                q11: 'b', q12: 'b', q13: 'a', q14: 'a', q15: 'b',
+                q16: 'b', q17: 'b', q18: 'b', q19: 'a', q20: 'a',
+                q21: 'b', q22: 'a', q23: 'a', q24: 'a', q25: 'a',
+                q26: 'c', q27: 'a', q28: 'a', q29: 'a', q30: 'a',
+                q31: 'b', q32: 'a', q33: 'b', q34: 'a', q35: 'b',
+                q36: 'a', q37: 'a', q38: 'b', q39: 'a', q40: 'a',
+                q41: 'b', q42: 'b', q43: 'b', q44: 'a', q45: 'b',
+                q46: 'a', q47: 'b', q48: 'a', q49: 'a', q50: 'a'
+            };
+
+            // Check each question
+            for (let q in answers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                const feedback = document.getElementById(`${q}Feedback`);
+                if (selected) {
+                    if (selected.value === answers[q]) {
+                        feedback.textContent = "Correct! 🎉";
+                        feedback.style.display = 'block';
+                        score++;
+                    } else {
+                        feedback.textContent = "Wrong! Try again. 😕";
+                        feedback.style.display = 'block';
+                    }
+                } else {
+                    feedback.textContent = "Please select an answer!";
+                    feedback.style.display = 'block';
+                }
+            }
+
+            // Display score
+            document.getElementById('score').textContent = `Your Score: ${score} out of 50`;
+
+            // Show share section
+            const shareSection = document.getElementById('shareSection');
+            if (shareSection) {
+                shareSection.style.display = 'block';
+                console.log('Share section displayed'); // Debug log
+            } else {
+                console.error('Share section not found!');
+            }
+        }
+
+        function shareOnWhatsApp() {
+            const score = document.getElementById('score').textContent.split(' ')[2];
+            const message = encodeURIComponent(`I scored ${score}/50 on the ExcelQuest Quiz! 🎉 Test your skills too: https://yourdomain.com/index.html`);
+            const whatsappURL = `https://api.whatsapp.com/send?text=${message}`;
+            window.open(whatsappURL, '_blank');
+        }
+    </script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92f271f52d977bdc',t:'MTc0NDQ1Nzk4Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>
